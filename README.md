@@ -1,2 +1,2 @@
 # Homeworks
-Homeworks from Introduction to programming classes.
+Homeworks from Object-Oriented Programing classes.
