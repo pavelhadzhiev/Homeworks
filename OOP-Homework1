@@ -50,6 +50,7 @@ struct university
     double grade()const;
     void sortByResults();
     void printStudents()const;
+    void getStudentInfo();
 };
 
 int main()
@@ -58,8 +59,8 @@ int main()
     a.read();
     a.addStudent();
     a.sortByResults();
-    a.print();
     a.printStudents();
+    a.getStudentInfo();
     return 0;
 }
 
@@ -198,5 +199,21 @@ void university::printStudents()const
     {
         arrayOfStudents[i].print();
         cout << endl;
+    }
+}
+
+void university::getStudentInfo()
+{
+    int FN;
+    cout << "Enter the FN of a student from " << name << ": ";
+    cin >> FN; cout << endl;
+    for (int i=0; i<numberOfStudents; i++)
+    {
+        if (arrayOfStudents[i].FN==FN)
+        {
+            arrayOfStudents[i].print();
+            break;
+        }
+        if (i==numberOfStudents-1)cout << "There is no student from " << name << " with this FN." << endl;
     }
 }
