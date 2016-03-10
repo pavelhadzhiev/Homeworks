@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+class Bandit
+{
+    char* name;
+    double rate;
+    bool isInPrison;
+    public:
+    Bandit(const char* name, double rate, bool isInPrison);
+    void set_name(const char* name);
+    void set_rate(double rate);
+    void set_isInPrison(bool isInPrison);
+    char* get_name()const;
+    double get_rate()const;
+    bool get_isInPrison()const;
+    void print()const;
+};
+
+class Gang
+{
+    Bandit members[100];
+    int size;
+};
+
+class Lable
+{
+    int barcode;
+    char* content;
+    void set_barcode(int barcode);
+    void set_content(const char* content);
+    int get_barcode()const;
+    char* get_content()const;
+    void print();
+};
+
+int main()
+{
+    Bandit a("Penko Georgiev", 0.8, 1);
+    a.print();
+    return 0;
+}
+
+void Bandit::set_name(const char* name)
+{
+    strcpy(this->name,name);
+}
+
+void Bandit::set_rate(double rate)
+{
+
+    this->rate=rate;
+}
+
+void Bandit::set_isInPrison(bool isInPrison)
+{
+    this->isInPrison=isInPrison;
+}
+
+char* Bandit::get_name()const
+{
+    return name;
+}
+
+double Bandit::get_rate()const
+{
+    return rate;
+}
+
+bool Bandit::get_isInPrison()const
+{
+    return isInPrison;
+}
+
+void Bandit::print()const
+{
+    cout << "Name: " << get_name() << endl;
+    cout << "Rate: " << get_rate() << endl;
+    cout << "Imprisoned: " << boolalpha << get_isInPrison() << endl;
+}
+
+Bandit::Bandit(const char* name, double rate, bool isInPrison)
+{
+    set_name(name);
+    set_rate(rate);
+    set_isInPrison(isInPrison);
+}
