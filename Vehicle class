@@ -1,0 +1,68 @@
+#include <iostream>
+#include <iomanip>
+#include <string.h>
+
+using namespace std;
+
+class Vehicle
+{
+private:
+    char* type;
+    char* brand;
+    int price;
+public:
+    Vehicle(char* type, char* brand, int price);
+    void print()const;
+    ~Vehicle(){cout << "DESTROY VEHICLE" << endl;}
+};
+
+class Car : public Vehicle
+{
+private:
+    char* model;
+    float engine;
+    int hp;
+    int year;
+public:
+    Car(char* inBrand, char* inModel, float inEngine, int inHp, int inYear, int inPrice);
+    ~Car(){cout << "DESTROY CAR" << endl;}
+    void print()const;
+};
+
+Vehicle::Vehicle( char* type, char* brand, int price)
+{
+    this->type=type;
+    this->brand=brand;
+    this->price=price;
+}
+
+void Vehicle::print()const
+{
+    cout << "Type: " << type << endl;
+    cout << "Brand: " << brand << endl;
+    cout << "Price: " << price << "$" << endl;
+}
+
+Car::Car(char* inBrand, char* inModel, float inEngine, int inHp, int inYear, int inPrice) : Vehicle("Car", inBrand, inPrice)
+{
+    model=inModel;
+    engine=inEngine;
+    hp=inHp;
+    year=inYear;
+}
+
+void Car::print()const
+{
+    Vehicle::print();
+    cout << "Model: " << model << endl;
+    cout << "Engine: " << setprecision(1) << fixed << engine << endl;
+    cout << "HP: " << hp << endl;
+    cout << "Year: " << year << endl;
+}
+
+int main()
+{
+    Car a("Volvo", "480 EC", 2.0, 107, 1993, 800);
+    a.print();
+    return 0;
+}
