@@ -9,8 +9,8 @@ class Bandit
     double rate;
     bool isInPrison;
     public:
-    Bandit(const char* name, double rate, bool isInPrison);
-    void set_name(const char* name);
+    Bandit(char* name, double rate, bool isInPrison);
+    void set_name(char* name);
     void set_rate(double rate);
     void set_isInPrison(bool isInPrison);
     char* get_name()const;
@@ -30,7 +30,7 @@ class Lable
     int barcode;
     char* content;
     void set_barcode(int barcode);
-    void set_content(const char* content);
+    void set_content(char* content);
     int get_barcode()const;
     char* get_content()const;
     void print();
@@ -43,14 +43,13 @@ int main()
     return 0;
 }
 
-void Bandit::set_name(const char* name)
+void Bandit::set_name(char* name)
 {
-    strcpy(this->name,name);
+    this->name=name;
 }
 
 void Bandit::set_rate(double rate)
 {
-
     this->rate=rate;
 }
 
@@ -81,7 +80,7 @@ void Bandit::print()const
     cout << "Imprisoned: " << boolalpha << get_isInPrison() << endl;
 }
 
-Bandit::Bandit(const char* name, double rate, bool isInPrison)
+Bandit::Bandit(char* name, double rate, bool isInPrison)
 {
     set_name(name);
     set_rate(rate);
