@@ -11,9 +11,8 @@ private:
     char* brand;
     int price;
 public:
-    Vehicle(char* type, char* brand, int price);
+    Vehicle(const char* type,const char* brand, int price);
     void print()const;
-    ~Vehicle(){cout << "DESTROY VEHICLE" << endl;}
 };
 
 class Car : public Vehicle
@@ -24,16 +23,17 @@ private:
     int hp;
     int year;
 public:
-    Car(char* inBrand, char* inModel, float inEngine, int inHp, int inYear, int inPrice);
-    ~Car(){cout << "DESTROY CAR" << endl;}
+    Car(const char* inBrand,const char* inModel, float inEngine, int inHp, int inYear, int inPrice);
     void print()const;
 };
 
-Vehicle::Vehicle( char* type, char* brand, int price)
+Vehicle::Vehicle(const char* inType,const char* inBrand, int inPrice)
 {
-    this->type=type;
-    this->brand=brand;
-    this->price=price;
+    type = new char[strlen(inType)+1];
+    brand = new char[strlen(inBrand)+1];
+    strcpy(type,inType);
+    strcpy(brand,inBrand);
+    price=inPrice;
 }
 
 void Vehicle::print()const
@@ -43,9 +43,10 @@ void Vehicle::print()const
     cout << "Price: " << price << "$" << endl;
 }
 
-Car::Car(char* inBrand, char* inModel, float inEngine, int inHp, int inYear, int inPrice) : Vehicle("Car", inBrand, inPrice)
+Car::Car(const char* inBrand,const char* inModel, float inEngine, int inHp, int inYear, int inPrice) : Vehicle("Car", inBrand, inPrice)
 {
-    model=inModel;
+    model = new char[strlen(inModel)+1];
+    strcpy(model,inModel);
     engine=inEngine;
     hp=inHp;
     year=inYear;
