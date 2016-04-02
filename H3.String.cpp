@@ -20,7 +20,7 @@ String::String(const char* str)
 
 String::String(const String& other)
 {
-    len = other.len;
+    len = other.len; 
     str = new char[len+1];
     strcpy(str,other.str);
 }
