@@ -24,7 +24,7 @@ int main()
     e.print();
     String f("Hi. ");
     f+="Bye. "; // test string += char*
-    cout << "Print f: " << endl;
+    cout << "Print f: " << endl; 
     f.print();
     String g; // test default constructor
     g = b; // test string = string
