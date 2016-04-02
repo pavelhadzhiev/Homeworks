@@ -23,7 +23,7 @@ public:
     friend String operator+(const char*, const String);
     String operator+=(const String);
     String operator+=(const char*);
-    char operator[](int);
+    char operator[](int); 
     bool operator==(const String);
     bool operator!=(const String);
     bool operator<(const String);
