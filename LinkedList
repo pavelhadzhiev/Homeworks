@@ -1,0 +1,165 @@
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+struct Node
+{
+    T data;
+    Node<T>* next;
+    Node<T> operator=(const Node<T>& other)
+    {
+        data = other.data;
+        next = other.next;
+    }
+};
+
+template <typename T>
+class LinkedList
+{
+    Node<T>* start;
+
+    void del();
+    void cpy(const LinkedList<T>&);
+public:
+    LinkedList();
+    ~LinkedList();
+    LinkedList(const LinkedList<T>&);
+
+    void addToStart(const T&);
+    void addToEnd(const T&);
+    void print();
+    T operator[](int);
+};
+
+int main()
+{
+    LinkedList<int> list;
+    list.addToStart(5);
+    list.addToStart(6);
+    list.addToStart(7);
+    list.addToEnd(4);
+    LinkedList<int> list2(list);
+    list.addToStart(8);
+    list.print();
+    cout << endl;
+    list2.print();
+    cout << endl << list[3] << endl << endl;
+    char* a = new char[10]; // какво трие тази памет и защо не крашва програмата?
+    a = "String";
+    cout << a;
+    return 0;
+}
+
+
+
+template <typename T>
+LinkedList<T>::~LinkedList()
+{
+    del();
+}
+
+template <typename T>
+LinkedList<T>::LinkedList()
+{
+    start = NULL;
+}
+
+template <typename T>
+void LinkedList<T>::addToStart(const T& toAdd)
+{
+    Node<T>* ptr = new Node<T>; // това се трие с дефолтния деструктор на Node, нали?
+    ptr->data = toAdd;
+    ptr->next = start;
+    start = ptr;
+}
+
+template <typename T>
+void LinkedList<T>::del()
+{
+    Node<T>* toDel;
+    while (start)
+    {
+        toDel = start;
+        start = start->next;
+        delete toDel;
+    }
+}
+
+template <typename T>
+void LinkedList<T>::print()
+{
+    Node<T>* ptr; // нужна ли е динамична памет за ptr?
+    ptr = start;
+    while (ptr!=NULL)
+    {
+        cout << ptr->data << endl;
+        ptr = ptr->next;
+    }
+}
+
+template <typename T>
+T LinkedList<T>::operator[](int index)
+{
+    Node<T>* ptr;
+    ptr = start;
+    while (ptr->next!=NULL)
+    {
+        if (index == 0) break;
+        ptr = ptr->next;
+        index--;
+    }
+    if (index > 0) cout << "Invalid index. Returning element with biggest valid index. " << endl;
+    return ptr->data;
+}
+
+template <typename T>
+void LinkedList<T>::addToEnd(const T& toAdd)
+{
+    Node<T>* ptr;
+    ptr = start;
+    while (ptr->next!=NULL)
+    {
+        ptr = ptr->next;
+    }
+    Node<T>* last = new Node<T>;
+    last->data = toAdd;
+    last->next = NULL;
+    ptr->next = last;
+//    Node<T> last;        // защо този вариант не работи?
+//    last.data = toAdd;
+//    last.next = NULL;
+//    ptr->next = &last;
+}
+
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T>& other)
+{
+    cpy(other);
+}
+
+template <typename T>
+void LinkedList<T>::cpy(const LinkedList<T>& other)
+{
+    if(other.start==NULL)
+    {
+        start = NULL;
+    }
+    else
+    {
+        Node<T>* iterThis;
+        Node<T>* iterOther;
+        start = new Node<T>;
+        start->data = other.start->data;
+        iterThis = start;
+        iterOther = other.start->next;
+        while (iterOther!=NULL)
+        {
+            iterThis->next = new Node<T>;
+            iterThis = iterThis->next;
+            iterThis->data = iterOther->data;
+            iterOther = iterOther->next;
+        }
+        iterThis->next = NULL;
+    }
+}
