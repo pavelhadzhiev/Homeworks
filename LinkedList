@@ -89,7 +89,7 @@ void LinkedList<T>::del()
 template <typename T>
 void LinkedList<T>::print()
 {
-    Node<T>* ptr; // нужна ли е динамична памет за ptr?
+    Node<T>* ptr;
     ptr = start;
     while (ptr!=NULL)
     {
